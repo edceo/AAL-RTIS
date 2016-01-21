@@ -1,0 +1,1 @@
+insert into Fallen select count(value) as c from Data.win:time_batch(30 sec) where sensorType like 'D' and value = 1 having count(value) > 3
