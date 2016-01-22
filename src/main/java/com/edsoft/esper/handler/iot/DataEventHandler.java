@@ -91,7 +91,7 @@ public class DataEventHandler implements InitializingBean {
     private void initService() {
         LOG.debug("Initializing Servcie ..");
         Configuration config = new Configuration();
-        config.addEventTypeAutoName("com.cor.cep.event");
+        config.addEventTypeAutoName("com.edsoft.iot");
         epService = EPServiceProviderManager.getDefaultProvider(config);
         createFallenEvent();
         createNeedMedicalEvent();
