@@ -68,22 +68,24 @@ public class IoTConsumer {
 
 
         //Kafka Consumer buraya eklenecek111
-        xrayExecutor.submit(() -> {
-            Map<String, Integer> topicCountMap = new HashMap<>();
-            topicCountMap.put(TOPIC, 1);
-            Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumerConnector.createMessageStreams(topicCountMap);
-            KafkaStream<byte[], byte[]> stream = consumerMap.get(TOPIC).get(0);
-            for (MessageAndMetadata<byte[], byte[]> aStream : stream) {
+        xrayExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                Map<String, Integer> topicCountMap = new HashMap<>();
+                topicCountMap.put(TOPIC, 1);
+                Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumerConnector.createMessageStreams(topicCountMap);
+                KafkaStream<byte[], byte[]> stream = consumerMap.get(TOPIC).get(0);
+                for (MessageAndMetadata<byte[], byte[]> aStream : stream) {
 
-                Data data = gson.fromJson(new String(aStream.message()), Data.class);
-                data.addTime();
+                    Data data = gson.fromJson(new String(aStream.message()), Data.class);
+                    data.addTime();
                 /*try {
                     randomAccessFile.write((gson.toJson(data) + "\r\n").getBytes());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }*/
-                dataEventHandler.handle(data);
-
+                    dataEventHandler.handle(data);
+                }
             }
         });
     }

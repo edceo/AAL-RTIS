@@ -4,17 +4,27 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.spout.SchemeAsMultiScheme;
 import backtype.storm.topology.TopologyBuilder;
+import com.edsoft.iot.Data;
 import com.edsoft.storm.PrinterBolt;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import storm.kafka.KafkaSpout;
 import storm.kafka.SpoutConfig;
 import storm.kafka.StringScheme;
 import storm.kafka.ZkHosts;
 
+import java.io.Serializable;
+
 /**
  * Hello world!
  */
-public class App {
+public class App implements Serializable {
+    private static transient Gson gson = new Gson();
+
     public static void main(String[] args) {
+        ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"application-context.xml"});
+        BeanFactory factory = (BeanFactory) appContext;
 
         ZkHosts zkHosts = new ZkHosts("192.168.1.14:2181");
         String topicName = "aalTestFour";
@@ -44,5 +54,9 @@ public class App {
         cluster.killTopology("KafkaConsumerTopology");
         cluster.shutdown();
         System.out.println("Hello World!");
+    }
+
+    public static Data changeFormat(String data) {
+        return gson.fromJson(data, Data.class);
     }
 }

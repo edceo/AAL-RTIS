@@ -7,13 +7,10 @@
 						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Process Spring Annotations -->
-    <context:component-scan base-package="com.cor.cep"/>
+    <context:component-scan base-package="com.edsoft"/>
 
-    <bean id="eventGenerator"
-          class="com.cor.cep.util.RandomTemperatureEventGenerator"/>
 
     <bean id="iotConsumer"
-          class="com.cor.cep.util.iot.IoTConsumer"/>
-
+          class="com.edsoft.esper.util.iot.IoTConsumer"/>
 
 </beans>

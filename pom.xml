@@ -116,5 +116,21 @@
             <artifactId>javax.mail</artifactId>
             <version>1.5.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-kafka</artifactId>
+            <version>0.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>0.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.variacode.cep.storm.esper</groupId>
+            <artifactId>storm-esper-bolt</artifactId>
+            <version>0.1</version>
+        </dependency>
+
     </dependencies>
 </project>
